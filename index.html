@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Manrope', sans-serif;
+        }
+        #container {
+            display: none;
+            height: 100%;
+        }
+        #focus, #relax {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 48px;
+        }
+        #focus {
+            background-color: red;
+        }
+        #relax {
+            background-color: black;
+        }
+        #pause {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 10;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+        }
+        #setup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #setup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        input, button {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        /* Media query for larger screens */
+        @media (min-width: 768px) {
+            #focus, #relax {
+                width: 50%;
+                height: 100%;
+                float: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="setup">
+        <div id="setup-content">
+            <h2>Pomodoro Setup</h2>
+            <label for="focus-time">Focus Time (minutes, max 360):</label>
+            <input type="number" id="focus-time" min="1" max="360" value="25"><br><br>
+            <label for="relax-time">Break Time (minutes, max 120):</label>
+            <input type="number" id="relax-time" min="1" max="120" value="5"><br><br>
+            <label for="loops">Number of Loops:</label>
+            <input type="number" id="loops" min="1" value="4"><br><br>
+            <button onclick="startPomodoro()">Start</button>
+        </div>
+    </div>
+    <div id="container">
+        <div id="focus"></div>
+        <div id="relax"></div>
+        <button id="pause" onclick="togglePause()">Pause</button>
+    </div>
+
+    <script>
+        let focusTime, relaxTime, loops;
+        let currentTimer, timerInterval;
+        let isPaused = false;
+        let isRelaxTime = false;
+        let currentLoop = 1;
+
+        function startPomodoro() {
+            focusTime = Math.min(parseInt(document.getElementById('focus-time').value), 360) * 60;
+            relaxTime = Math.min(parseInt(document.getElementById('relax-time').value), 120) * 60;
+            loops = parseInt(document.getElementById('loops').value);
+
+            document.getElementById('setup').style.display = 'none';
+            document.getElementById('container').style.display = 'block';
+
+            startFocusTimer();
+        }
+
+        function startFocusTimer() {
+            isRelaxTime = false;
+            currentTimer = focusTime;
+            updateTimer();
+            timerInterval = setInterval(updateTimer, 1000);
+            document.getElementById('relax').textContent = '';
+        }
+
+        function startRelaxTimer() {
+            isRelaxTime = true;
+            currentTimer = relaxTime;
+            updateTimer();
+            timerInterval = setInterval(updateTimer, 1000);
+            document.getElementById('focus').textContent = '';
+        }
+
+        function updateTimer() {
+            if (!isPaused) {
+                currentTimer--;
+                const minutes = Math.floor(currentTimer / 60);
+                const seconds = currentTimer % 60;
+                const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (isRelaxTime) {
+                    document.getElementById('relax').textContent = display;
+                } else {
+                    document.getElementById('focus').textContent = display;
+                }
+
+                if (currentTimer === 0) {
+                    clearInterval(timerInterval);
+                    if (isRelaxTime) {
+                        playRelaxEndSound();
+                        document.getElementById('relax').textContent = 'FOCUS';
+                        currentLoop++;
+                        if (currentLoop > loops) {
+                            playLoopEndSound();
+                            resetPomodoro();
+                        } else {
+                            setTimeout(startFocusTimer, 3000); // Wait 3 seconds before starting next focus timer
+                        }
+                    } else {
+                        playTimerEndSound();
+                        document.getElementById('focus').textContent = 'RELAX';
+                        setTimeout(startRelaxTimer, 3000); // Wait 3 seconds before starting relax timer
+                    }
+                }
+            }
+        }
+
+        function togglePause() {
+            isPaused = !isPaused;
+            document.getElementById('pause').textContent = isPaused ? 'Resume' : 'Pause';
+        }
+
+        function playTimerEndSound() {
+            const audio = new Audio('audio/timer.wav');
+            audio.play();
+        }
+
+        function playRelaxEndSound() {
+            const audio = new Audio('audio/relax.wav');
+            audio.play();
+        }
+
+        function playLoopEndSound() {
+            const audio = new Audio('audio/loop.wav');
+            audio.play();
+        }
+
+        function resetPomodoro() {
+            document.getElementById('container').style.display = 'none';
+            document.getElementById('setup').style.display = 'flex';
+            document.getElementById('focus').textContent = '';
+            document.getElementById('relax').textContent = '';
+            currentLoop = 1;
+            isPaused = false;
+        }
+    </script>
+</body>
+</html>
