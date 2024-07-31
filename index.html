@@ -95,101 +95,101 @@
     </div>
 
     <script>
-        let focusTime, relaxTime, loops;
-        let currentTimer, timerInterval;
-        let isPaused = false;
-        let isRelaxTime = false;
-        let currentLoop = 1;
+let focusTime, relaxTime, loops;
+let currentTimer, timerInterval;
+let isPaused = false;
+let isRelaxTime = false;
+let currentLoop = 1;
 
-        function startPomodoro() {
-            focusTime = Math.min(parseInt(document.getElementById('focus-time').value), 360) * 60;
-            relaxTime = Math.min(parseInt(document.getElementById('relax-time').value), 120) * 60;
-            loops = parseInt(document.getElementById('loops').value);
+function startPomodoro() {
+    focusTime = Math.min(parseInt(document.getElementById('focus-time').value), 360) * 60;
+    relaxTime = Math.min(parseInt(document.getElementById('relax-time').value), 120) * 60;
+    loops = parseInt(document.getElementById('loops').value);
 
-            document.getElementById('setup').style.display = 'none';
-            document.getElementById('container').style.display = 'block';
+    document.getElementById('setup').style.display = 'none';
+    document.getElementById('container').style.display = 'block';
 
-            startFocusTimer();
+    startFocusTimer();
+}
+
+function startFocusTimer() {
+    isRelaxTime = false;
+    currentTimer = focusTime;
+    updateTimer();
+    timerInterval = setInterval(updateTimer, 1000);
+    document.getElementById('relax').textContent = '';
+}
+
+function startRelaxTimer() {
+    isRelaxTime = true;
+    currentTimer = relaxTime;
+    updateTimer();
+    timerInterval = setInterval(updateTimer, 1000);
+    document.getElementById('focus').textContent = '';
+}
+
+function updateTimer() {
+    if (!isPaused) {
+        currentTimer--;
+        const minutes = Math.floor(currentTimer / 60);
+        const seconds = currentTimer % 60;
+        const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        if (isRelaxTime) {
+            document.getElementById('relax').textContent = display;
+        } else {
+            document.getElementById('focus').textContent = display;
         }
 
-        function startFocusTimer() {
-            isRelaxTime = false;
-            currentTimer = focusTime;
-            updateTimer();
-            timerInterval = setInterval(updateTimer, 1000);
-            document.getElementById('relax').textContent = '';
-        }
-
-        function startRelaxTimer() {
-            isRelaxTime = true;
-            currentTimer = relaxTime;
-            updateTimer();
-            timerInterval = setInterval(updateTimer, 1000);
-            document.getElementById('focus').textContent = '';
-        }
-
-        function updateTimer() {
-            if (!isPaused) {
-                currentTimer--;
-                const minutes = Math.floor(currentTimer / 60);
-                const seconds = currentTimer % 60;
-                const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                
-                if (isRelaxTime) {
-                    document.getElementById('relax').textContent = display;
+        if (currentTimer === 0) {
+            clearInterval(timerInterval);
+            if (isRelaxTime) {
+                currentLoop++;
+                if (currentLoop > loops) {
+                    playLoopEndSound();
+                    resetPomodoro();
                 } else {
-                    document.getElementById('focus').textContent = display;
+                    playRelaxEndSound();
+                    document.getElementById('relax').textContent = 'FOCUS';
+                    setTimeout(startFocusTimer, 3000); // Wait 3 seconds before starting next focus timer
                 }
-
-                if (currentTimer === 0) {
-                    clearInterval(timerInterval);
-                    if (isRelaxTime) {
-                        playRelaxEndSound();
-                        document.getElementById('relax').textContent = 'FOCUS';
-                        currentLoop++;
-                        if (currentLoop > loops) {
-                            playLoopEndSound();
-                            resetPomodoro();
-                        } else {
-                            setTimeout(startFocusTimer, 3000); // Wait 3 seconds before starting next focus timer
-                        }
-                    } else {
-                        playTimerEndSound();
-                        document.getElementById('focus').textContent = 'RELAX';
-                        setTimeout(startRelaxTimer, 3000); // Wait 3 seconds before starting relax timer
-                    }
-                }
+            } else {
+                playTimerEndSound();
+                document.getElementById('focus').textContent = 'RELAX';
+                setTimeout(startRelaxTimer, 3000); // Wait 3 seconds before starting relax timer
             }
         }
+    }
+}
 
-        function togglePause() {
-            isPaused = !isPaused;
-            document.getElementById('pause').textContent = isPaused ? 'Resume' : 'Pause';
-        }
+function togglePause() {
+    isPaused = !isPaused;
+    document.getElementById('pause').textContent = isPaused ? 'Resume' : 'Pause';
+}
 
-        function playTimerEndSound() {
-            const audio = new Audio('audio/timer.wav');
-            audio.play();
-        }
+function playTimerEndSound() {
+    const audio = new Audio('audio/timer.wav');
+    audio.play();
+}
 
-        function playRelaxEndSound() {
-            const audio = new Audio('audio/relax.wav');
-            audio.play();
-        }
+function playRelaxEndSound() {
+    const audio = new Audio('audio/relax.wav');
+    audio.play();
+}
 
-        function playLoopEndSound() {
-            const audio = new Audio('audio/loop.wav');
-            audio.play();
-        }
+function playLoopEndSound() {
+    const audio = new Audio('audio/loop.wav');
+    audio.play();
+}
 
-        function resetPomodoro() {
-            document.getElementById('container').style.display = 'none';
-            document.getElementById('setup').style.display = 'flex';
-            document.getElementById('focus').textContent = '';
-            document.getElementById('relax').textContent = '';
-            currentLoop = 1;
-            isPaused = false;
-        }
+function resetPomodoro() {
+    document.getElementById('container').style.display = 'none';
+    document.getElementById('setup').style.display = 'flex';
+    document.getElementById('focus').textContent = '';
+    document.getElementById('relax').textContent = '';
+    currentLoop = 1;
+    isPaused = false;
+}
     </script>
 </body>
 </html>
