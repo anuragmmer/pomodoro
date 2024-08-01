@@ -13,7 +13,7 @@ A simple, elegant Pomodoro Timer web application to boost your productivity.
 
 ## How to Use
 
-1. Visit the website [anuragmmer.github.io/pomodoro]
+1. Visit the (website)[anuragmmer.github.io/pomodoro] or download and install the (Android app)[https://github.com/anuragmmer/pomodoro/raw/main/assets/android/anuragmmer.pomodoro.v.1.0.apk]
 2. Set your desired focus time (1-360 minutes)
 3. Set your desired break time (1-120 minutes)
 4. Choose the number of loops you want to complete
