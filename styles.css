@@ -1,0 +1,153 @@
+body {
+    font-family: 'Manrope', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #000;
+    color: #fff;
+    user-select: none; 
+    -webkit-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none; 
+}
+
+#setup-popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    text-align: center;
+    top: 50;
+    left: 50;
+    width: 90%;
+    max-width: 300px; 
+    height: auto;
+    max-height: 80%;
+    background-color: white; 
+    color: black;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+    overflow-y: auto; 
+}
+
+#setup-popup input, #setup-popup button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd; 
+    border-radius: 5px;
+    width: calc(100% - 22px); 
+}
+
+#setup-popup input {
+    box-sizing: border-box;
+}
+
+#setup-popup button {
+    background-color: #000000; 
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#setup-popup button:hover {
+    background-color: #5f666e; 
+}
+
+
+.timer, .stats {
+    display: none;
+}
+
+#timer {
+    display: flex;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    background-color: black; 
+    text-align: center;
+}
+
+#time {
+    font-size: 6rem;
+    color: white;
+    font-family: "Gloock", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#status {
+    position: absolute;
+    bottom: 20px;
+    font-size: 1rem;
+    color: white;
+    max-width: fit-content;
+    max-height: fit-content;
+    text-align: center;
+
+}
+
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.stats p {
+    margin: 5px 0;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 0px solid #3a3a3a;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+.pause-text {
+    position: absolute;
+    bottom: 50px; 
+    font-size: 0.9rem; 
+    color: rgb(99, 99, 99);
+    display: none;
+    text-align: center;
+    justify-content: center;
+    text-justify: auto;
+    display: none;
+    text-decoration: solid;
+    animation: blink 1s infinite;
+}
+
+.blinking {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}

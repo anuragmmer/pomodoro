@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    
+    <div class="setup-popup" id="setup-popup">
+        <h1>Pomodoro Setup</h1>
+        <label for="focus-time">Focus Time (minutes)</label>
+        <input type="number" id="focus-time" max="360">
+        
+        <label for="rest-time">Rest Time (minutes)</label>
+        <input type="number" id="rest-time" max="120">
+        
+        <label for="loops">Number of Loops</label>
+        <input type="number" id="loops">
+        
+        <button id="start-btn">Start</button>
+    </div>
+    
+    <div class="timer" id="timer">
+        <div class="time" id="time">25:00</div>
+        <div class="status" id="status">Focus</div>
+        <div class="pause-text" id="pause-text">Tap to continue!</div>
+    </div>
+    
+    <div class="stats" id="stats">
+        <p>Total Focus Time: <span id="total-focus-time">0</span> minutes</p>
+        <p>Total Break Time: <span id="total-break-time">0</span> minutes</p>
+        <p>Loops Completed: <span id="loops-completed">0</span></p>
+        <p>Loops Remaining: <span id="loops-remaining">0</span></p>
+    </div>
+
+    <audio id="end-sound" src="audio/timer.wav"></audio>
+    <audio id="relax-sound" src="audio/relax.wav"></audio>
+    <audio id="loop-sound" src="audio/loop.wav"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
