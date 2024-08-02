@@ -130,8 +130,8 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (touchEndY - touchStartY > 30) {
             // Swipe down
             if (setupPopup.style.display === "none") {
-                timer.style.display = "none";
-                stats.style.display = "block";
+                timer.style.display = "block";
+                stats.style.display = "none";
             }
         }
     });
