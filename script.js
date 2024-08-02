@@ -20,14 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
     function disableTimer() {
         timer.style.display = "none";
         stats.style.display = "none";
-        pauseText.style.display = "none";
-        clearInterval(interval);
+        pauseText.style.display = "none"; 
+        clearInterval(interval); 
     }
 
     function enableTimer() {
         timer.style.display = "flex";
         stats.style.display = "none";
-        pauseText.style.display = "none";
+        pauseText.style.display = "none"; 
     }
 
     function preloadSound(audioElement) {
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
         loops = parseInt(document.getElementById("loops").value) || 1;
 
         setupPopup.style.display = "none";
-        enableTimer();
+        enableTimer(); 
         startTimer(focusTime * 60, STATUS_FOCUS);
     });
 
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     clearInterval(interval);
                     if (status === STATUS_FOCUS) {
                         totalFocusTime += focusTime;
-                        endSound.play();
+                        endSound.play(); 
                         startTimer(restTime * 60, STATUS_RELAX);
                     } else if (status === STATUS_RELAX) {
                         totalBreakTime += restTime;
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         if (currentLoop < loops) {
                             startTimer(focusTime * 60, STATUS_FOCUS);
                         } else {
-                            loopSound.play();
+                            loopSound.play(); 
                             timer.style.display = "none";
                             stats.style.display = "block";
                             updateStats();
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     timer.addEventListener("click", function () {
-        if (setupPopup.style.display === "none") {
+        if (setupPopup.style.display === "none") { 
             isPaused = !isPaused;
             pauseText.style.display = isPaused ? "block" : "none";
             pauseText.classList.toggle("blinking", isPaused);
@@ -114,22 +114,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let touchStartY = 0;
 
-    timer.addEventListener("touchstart", function (e) {
+    document.body.addEventListener("touchstart", function (e) {
         touchStartY = e.changedTouches[0].clientY;
     });
 
-    timer.addEventListener("touchend", function (e) {
+    document.body.addEventListener("touchend", function (e) {
         let touchEndY = e.changedTouches[0].clientY;
-        if (touchStartY - touchEndY > 30) {
-            // Swipe up
-            if (setupPopup.style.display === "none") {
+        if (setupPopup.style.display === "none") {
+            if (touchStartY - touchEndY > 30) {
+                // Swipe up
                 console.log("Swiped up");
                 timer.style.display = "none";
                 stats.style.display = "block";
-            }
-        } else if (touchEndY - touchStartY > 30) {
-            // Swipe down
-            if (setupPopup.style.display === "none") {
+            } else if (touchEndY - touchStartY > 30) {
+                // Swipe down
                 console.log("Swiped down");
                 timer.style.display = "block";
                 stats.style.display = "none";
