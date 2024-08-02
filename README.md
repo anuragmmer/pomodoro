@@ -10,6 +10,7 @@ A simple, elegant Pomodoro Timer web application to boost your productivity.
 - Audio notifications for timer completion
 - Pause and resume functionality
 - Visual cues for focus and break periods
+- Stats functionality 
 
 ## How to Use
 
@@ -22,6 +23,7 @@ A simple, elegant Pomodoro Timer web application to boost your productivity.
 7. When a focus period ends hear a notification
 8. When a break period ends hear a notification
 9. After completing all loops the setup screen will reappear
+10. Swipe up to view your stats and swipe down to hide it.
 
 ## Technical Details
 
@@ -33,4 +35,3 @@ A simple, elegant Pomodoro Timer web application to boost your productivity.
 ## Acknowledgments
 
 - Inspiration: The Pomodoro Technique by Francesco Cirillo
-- Font: Manrope by Mikhail Sharanda
