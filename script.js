@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     timer.addEventListener("touchend", function (e) {
-        let touchEndY = e.changedTouches[0].clientY;
+        touchEndY = e.changedTouches[0].clientY;
         if (touchStartY - touchEndY > 30) {
             if (setupPopup.style.display === "none") {
                 timer.style.display = "none";
