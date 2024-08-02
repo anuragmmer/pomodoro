@@ -113,26 +113,26 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    let touchStartY = 0;
+let touchStartY = 0;
 
-    timer.addEventListener("touchstart", function (e) {
-        touchStartY = e.touches[0].clientY;
-    });
+// Add touchstart listener to capture the initial touch position
+timer.addEventListener("touchstart", function (e) {
+    touchStartY = e.changedTouches[0].clientY;
+});
 
-    timer.addEventListener("touchend", function (e) {
-        let touchEndY = e.changedTouches[0].clientY;
-        if (touchStartY - touchEndY > 30) {
-            // Swipe up
-            if (setupPopup.style.display === "none") {
-                timer.style.display = "none";
-                stats.style.display = "block";
-            }
-        } else if (touchEndY - touchStartY > 30) {
-            // Swipe down
-            if (setupPopup.style.display === "none") {
-                timer.style.display = "block";
-                stats.style.display = "none";
-            }
+timer.addEventListener("touchend", function (e) {
+    let touchEndY = e.changedTouches[0].clientY;
+    if (touchStartY - touchEndY > 30) {
+        // Swipe up
+        if (setupPopup.style.display === "none") {
+            timer.style.display = "none";
+            stats.style.display = "block";
         }
-    });
+    } else if (touchEndY - touchStartY > 30) {
+        // Swipe down
+        if (setupPopup.style.display === "none") {
+            timer.style.display = "block";
+            stats.style.display = "none";
+        }
+    }
 });
