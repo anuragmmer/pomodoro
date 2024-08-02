@@ -7,13 +7,12 @@ body {
     margin: 0;
     background-color: #000;
     color: #fff;
-    user-select: none; 
-    -webkit-user-select: none; 
+    user-select: none;
+    -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none; 
-    
-
-    
+    -ms-user-select: none;
+    position: relative;
+    overflow: hidden;
 }
 
 #setup-popup {
@@ -23,28 +22,29 @@ body {
     align-items: center;
     position: fixed;
     text-align: center;
-    top: 50;
-    left: 50;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 90%;
-    max-width: 300px; 
+    max-width: 300px;
     height: auto;
     max-height: 80%;
-    background-color: white; 
+    background-color: white;
     color: black;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     z-index: 1000;
-    overflow-y: auto; 
+    overflow-y: auto;
 }
 
 #setup-popup input, #setup-popup button {
     margin: 10px;
     padding: 10px;
     font-size: 1rem;
-    border: 1px solid #ddd; 
+    border: 1px solid #ddd;
     border-radius: 5px;
-    width: calc(100% - 22px); 
+    width: calc(100% - 22px);
 }
 
 #setup-popup input {
@@ -52,33 +52,39 @@ body {
 }
 
 #setup-popup button {
-    background-color: #000000; 
+    background-color: #000000;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 #setup-popup button:hover {
-    background-color: #5f666e; 
+    background-color: #5f666e;
 }
 
-
-.timer, .stats {
-    display: none;
-}
-
-#timer {
+#timer, #stats {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
     display: flex;
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    position: relative;
-    background-color: black; 
+    background-color: black;
     text-align: center;
+    transition: opacity 0.3s ease;
+}
+
+#timer {
+    z-index: 1;
+}
+
+#stats {
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
 }
 
 #time {
@@ -97,12 +103,6 @@ body {
     max-width: fit-content;
     max-height: fit-content;
     text-align: center;
-
-}
-
-
-@keyframes blink {
-    50% { opacity: 0; }
 }
 
 .stats p {
@@ -133,16 +133,16 @@ button {
     color: rgb(0, 0, 0);
     cursor: pointer;
 }
+
 .pause-text {
     position: absolute;
-    bottom: 50px; 
-    font-size: 0.9rem; 
+    bottom: 50px;
+    font-size: 0.9rem;
     color: rgb(99, 99, 99);
     display: none;
     text-align: center;
     justify-content: center;
     text-justify: auto;
-    display: none;
     text-decoration: solid;
     animation: blink 1s infinite;
 }
