@@ -119,14 +119,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     timer.addEventListener("touchend", function (e) {
-        touchEndY = e.changedTouches[0].clientY;
+        let touchEndY = e.changedTouches[0].clientY;
         if (touchStartY - touchEndY > 30) {
+            // Swipe up
             if (setupPopup.style.display === "none") {
+                console.log("Swiped up");
                 timer.style.display = "none";
                 stats.style.display = "block";
             }
         } else if (touchEndY - touchStartY > 30) {
+            // Swipe down
             if (setupPopup.style.display === "none") {
+                console.log("Swiped down");
                 timer.style.display = "block";
                 stats.style.display = "none";
             }
