@@ -16,18 +16,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let focusTime, restTime, loops;
     let interval, currentLoop = 0, totalFocusTime = 0, totalBreakTime = 0, isPaused = false;
+    let touchStartY = 0;
 
     function disableTimer() {
-        timer.style.display = "none";
-        stats.style.display = "none";
-        pauseText.style.display = "none"; 
-        clearInterval(interval); 
+        timer.style.opacity = "0";
+        timer.style.pointerEvents = "none";
+        stats.style.opacity = "0";
+        stats.style.pointerEvents = "none";
+        pauseText.style.display = "none";
+        clearInterval(interval);
     }
 
     function enableTimer() {
-        timer.style.display = "flex";
-        stats.style.display = "none";
-        pauseText.style.display = "none"; 
+        timer.style.opacity = "1";
+        timer.style.pointerEvents = "auto";
+        stats.style.opacity = "0";
+        stats.style.pointerEvents = "none";
+        pauseText.style.display = "none";
     }
 
     function preloadSound(audioElement) {
@@ -50,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
         loops = parseInt(document.getElementById("loops").value) || 1;
 
         setupPopup.style.display = "none";
-        enableTimer(); 
+        enableTimer();
         startTimer(focusTime * 60, STATUS_FOCUS);
     });
 
@@ -68,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     clearInterval(interval);
                     if (status === STATUS_FOCUS) {
                         totalFocusTime += focusTime;
-                        endSound.play(); 
+                        endSound.play();
                         startTimer(restTime * 60, STATUS_RELAX);
                     } else if (status === STATUS_RELAX) {
                         totalBreakTime += restTime;
@@ -76,9 +81,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         if (currentLoop < loops) {
                             startTimer(focusTime * 60, STATUS_FOCUS);
                         } else {
-                            loopSound.play(); 
-                            timer.style.display = "none";
-                            stats.style.display = "block";
+                            loopSound.play();
+                            timer.style.opacity = "0";
+                            timer.style.pointerEvents = "none";
+                            stats.style.opacity = "1";
+                            stats.style.pointerEvents = "auto";
                             updateStats();
 
                             setTimeout(() => {
@@ -105,14 +112,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     timer.addEventListener("click", function () {
-        if (setupPopup.style.display === "none") { 
+        if (setupPopup.style.display === "none") {
             isPaused = !isPaused;
             pauseText.style.display = isPaused ? "block" : "none";
             pauseText.classList.toggle("blinking", isPaused);
         }
     });
-
-    let touchStartY = 0;
 
     document.body.addEventListener("touchstart", function (e) {
         touchStartY = e.changedTouches[0].clientY;
@@ -124,13 +129,17 @@ document.addEventListener("DOMContentLoaded", function () {
             if (touchStartY - touchEndY > 30) {
                 // Swipe up
                 console.log("Swiped up");
-                timer.style.display = "none";
-                stats.style.display = "block";
+                timer.style.opacity = "0";
+                timer.style.pointerEvents = "none";
+                stats.style.opacity = "1";
+                stats.style.pointerEvents = "auto";
             } else if (touchEndY - touchStartY > 30) {
                 // Swipe down
                 console.log("Swiped down");
-                timer.style.display = "block";
-                stats.style.display = "none";
+                timer.style.opacity = "1";
+                timer.style.pointerEvents = "auto";
+                stats.style.opacity = "0";
+                stats.style.pointerEvents = "none";
             }
         }
     });
