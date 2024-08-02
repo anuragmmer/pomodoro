@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let focusTime, restTime, loops;
     let interval, currentLoop = 0, totalFocusTime = 0, totalBreakTime = 0, isPaused = false;
     let touchStartY = 0;
+    let currentStatus = STATUS_FOCUS;
+    let currentTime = 0;
 
     function disableTimer() {
         timer.style.opacity = "0";
@@ -60,16 +62,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function startTimer(duration, status) {
-        let time = duration;
+        currentTime = duration;
+        currentStatus = status;
         statusDisplay.textContent = status;
-        timeDisplay.textContent = formatTime(time);
+        timeDisplay.textContent = formatTime(currentTime);
 
         interval = setInterval(() => {
             if (!isPaused) {
-                time--;
-                timeDisplay.textContent = formatTime(time);
+                currentTime--;
+                timeDisplay.textContent = formatTime(currentTime);
 
-                if (time <= 0) {
+                updateStats();
+
+                if (currentTime <= 0) {
                     clearInterval(interval);
                     if (status === STATUS_FOCUS) {
                         totalFocusTime += focusTime;
@@ -105,8 +110,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateStats() {
-        document.getElementById("total-focus-time").textContent = totalFocusTime;
-        document.getElementById("total-break-time").textContent = totalBreakTime;
+        let currentFocusTime = totalFocusTime;
+        let currentBreakTime = totalBreakTime;
+
+        if (currentStatus === STATUS_FOCUS) {
+            currentFocusTime += Math.floor((focusTime * 60 - currentTime) / 60);
+        } else if (currentStatus === STATUS_RELAX) {
+            currentBreakTime += Math.floor((restTime * 60 - currentTime) / 60);
+        }
+
+        document.getElementById("total-focus-time").textContent = currentFocusTime;
+        document.getElementById("total-break-time").textContent = currentBreakTime;
         document.getElementById("loops-completed").textContent = currentLoop;
         document.getElementById("loops-remaining").textContent = loops - currentLoop;
     }
