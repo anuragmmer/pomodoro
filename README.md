@@ -2,6 +2,9 @@
 
 A simple, elegant Pomodoro Timer web application to boost your productivity.
 
+![image](https://github.com/user-attachments/assets/f70712ed-bc38-4128-ae6d-0715ae5a5baf)![image](https://github.com/user-attachments/assets/9197f149-e7bb-48ac-948e-0ad22430aec1)![Screenshot_20240803_183155](https://github.com/user-attachments/assets/4a57be7b-b0f9-421b-98ef-c5132c25afe8)![Screenshot_20240803_183151](https://github.com/user-attachments/assets/9526b47e-ee72-45e9-9a65-455c3622979f)![Screenshot_20240803_183157](https://github.com/user-attachments/assets/5f4a6949-b7ba-4242-8942-7a193bc1f669)
+
+
 ## Features
 
 - Customizable focus and break durations
