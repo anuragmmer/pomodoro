@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let touchStartY = 0;
     let currentStatus = STATUS_FOCUS;
     let currentTime = 0;
+    let totalCompletedLoops = 0;
+    let sessionStartTime = 0;
+    let pausedTime = 0;
 
     function disableTimer() {
         timer.style.opacity = "0";
@@ -32,8 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function enableTimer() {
         timer.style.opacity = "1";
         timer.style.pointerEvents = "auto";
-        stats.style.opacity = "0";
-        stats.style.pointerEvents = "none";
+        stats.style.opacity = "1";
+        stats.style.pointerEvents = "auto";
         pauseText.style.display = "none";
     }
 
@@ -58,6 +61,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         setupPopup.style.display = "none";
         enableTimer();
+        currentLoop = 0;
+        totalFocusTime = 0;
+        totalBreakTime = 0;
+        sessionStartTime = Date.now();
+        pausedTime = 0;
         startTimer(focusTime * 60, STATUS_FOCUS);
     });
 
@@ -67,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
         statusDisplay.textContent = status;
         timeDisplay.textContent = formatTime(currentTime);
 
+        clearInterval(interval);
         interval = setInterval(() => {
             if (!isPaused) {
                 currentTime--;
@@ -86,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         if (currentLoop < loops) {
                             startTimer(focusTime * 60, STATUS_FOCUS);
                         } else {
+                            totalCompletedLoops += loops;
                             loopSound.play();
                             timer.style.opacity = "0";
                             timer.style.pointerEvents = "none";
@@ -110,6 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateStats() {
+        let currentSessionTime = Math.floor((Date.now() - sessionStartTime - pausedTime) / 1000);
         let currentFocusTime = totalFocusTime;
         let currentBreakTime = totalBreakTime;
 
@@ -121,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.getElementById("total-focus-time").textContent = currentFocusTime;
         document.getElementById("total-break-time").textContent = currentBreakTime;
-        document.getElementById("loops-completed").textContent = currentLoop;
+        document.getElementById("loops-completed").textContent = totalCompletedLoops + currentLoop;
         document.getElementById("loops-remaining").textContent = loops - currentLoop;
     }
 
@@ -130,6 +141,12 @@ document.addEventListener("DOMContentLoaded", function () {
             isPaused = !isPaused;
             pauseText.style.display = isPaused ? "block" : "none";
             pauseText.classList.toggle("blinking", isPaused);
+
+            if (isPaused) {
+                pausedTime -= Date.now();
+            } else {
+                pausedTime += Date.now();
+            }
         }
     });
 
