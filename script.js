@@ -94,8 +94,6 @@ document.addEventListener("DOMContentLoaded", function () {
         setupPopup.style.display = "none";
         enableTimer();
         currentLoop = 0;
-        totalFocusTime = 0;
-        totalBreakTime = 0;
         sessionStartTime = Date.now();
         pausedTime = 0;
         isStatsVisible = false;
@@ -171,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.addEventListener("keydown", function(event) {
         if (event.code === "Space") {
-            event.preventDefault(); // Scroll lock hehe
+            event.preventDefault(); //scroll lock hehe
             togglePause();
         } else if (event.key === "i" || event.key === "s") {
             toggleStats();
