@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let totalCompletedLoops = 0;
     let sessionStartTime = 0;
     let pausedTime = 0;
+    let isStatsVisible = false;
 
     function disableTimer() {
         timer.style.opacity = "0";
@@ -35,8 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function enableTimer() {
         timer.style.opacity = "1";
         timer.style.pointerEvents = "auto";
-        stats.style.opacity = "1";
-        stats.style.pointerEvents = "auto";
+        stats.style.opacity = "0";
+        stats.style.pointerEvents = "none";
         pauseText.style.display = "none";
     }
 
@@ -54,6 +55,37 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log('All sounds are ready');
     });
 
+    function togglePause() {
+        if (setupPopup.style.display === "none") {
+            isPaused = !isPaused;
+            pauseText.style.display = isPaused ? "block" : "none";
+            pauseText.classList.toggle("blinking", isPaused);
+
+            if (isPaused) {
+                pausedTime -= Date.now();
+            } else {
+                pausedTime += Date.now();
+            }
+        }
+    }
+
+    function toggleStats() {
+        if (setupPopup.style.display === "none") {
+            isStatsVisible = !isStatsVisible;
+            if (isStatsVisible) {
+                timer.style.opacity = "0";
+                timer.style.pointerEvents = "none";
+                stats.style.opacity = "1";
+                stats.style.pointerEvents = "auto";
+            } else {
+                timer.style.opacity = "1";
+                timer.style.pointerEvents = "auto";
+                stats.style.opacity = "0";
+                stats.style.pointerEvents = "none";
+            }
+        }
+    }
+
     startBtn.addEventListener("click", function () {
         focusTime = parseInt(document.getElementById("focus-time").value) || 25;
         restTime = parseInt(document.getElementById("rest-time").value) || 5;
@@ -66,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
         totalBreakTime = 0;
         sessionStartTime = Date.now();
         pausedTime = 0;
+        isStatsVisible = false;
         startTimer(focusTime * 60, STATUS_FOCUS);
     });
 
@@ -97,10 +130,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         } else {
                             totalCompletedLoops += loops;
                             loopSound.play();
-                            timer.style.opacity = "0";
-                            timer.style.pointerEvents = "none";
-                            stats.style.opacity = "1";
-                            stats.style.pointerEvents = "auto";
+                            isStatsVisible = true;
+                            toggleStats();
                             updateStats();
 
                             setTimeout(() => {
@@ -136,17 +167,14 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("loops-remaining").textContent = loops - currentLoop;
     }
 
-    timer.addEventListener("click", function () {
-        if (setupPopup.style.display === "none") {
-            isPaused = !isPaused;
-            pauseText.style.display = isPaused ? "block" : "none";
-            pauseText.classList.toggle("blinking", isPaused);
+    timer.addEventListener("click", togglePause);
 
-            if (isPaused) {
-                pausedTime -= Date.now();
-            } else {
-                pausedTime += Date.now();
-            }
+    document.addEventListener("keydown", function(event) {
+        if (event.code === "Space") {
+            event.preventDefault(); // Scroll lock hehe
+            togglePause();
+        } else if (event.key === "i" || event.key === "s") {
+            toggleStats();
         }
     });
 
@@ -158,19 +186,13 @@ document.addEventListener("DOMContentLoaded", function () {
         let touchEndY = e.changedTouches[0].clientY;
         if (setupPopup.style.display === "none") {
             if (touchStartY - touchEndY > 30) {
-                // Swipe up
+                // Swipe up hehe
                 console.log("Swiped up");
-                timer.style.opacity = "0";
-                timer.style.pointerEvents = "none";
-                stats.style.opacity = "1";
-                stats.style.pointerEvents = "auto";
+                toggleStats();
             } else if (touchEndY - touchStartY > 30) {
-                // Swipe down
+                // Swipe down hehe
                 console.log("Swiped down");
-                timer.style.opacity = "1";
-                timer.style.pointerEvents = "auto";
-                stats.style.opacity = "0";
-                stats.style.pointerEvents = "none";
+                toggleStats();
             }
         }
     });
