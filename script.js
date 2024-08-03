@@ -128,8 +128,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         } else {
                             totalCompletedLoops += loops;
                             loopSound.play();
-                            isStatsVisible = true;
-                            toggleStats();
+                            if (!isStatsVisible) {
+                                toggleStats();
+                            }
                             updateStats();
 
                             setTimeout(() => {
