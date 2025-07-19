@@ -1,43 +1,99 @@
 # Pomodoro Timer
 
-A simple, elegant Pomodoro Timer web application to boost your productivity.
+A clean, minimal Pomodoro Timer web application built with vanilla JavaScript.
 
-![Desktop](https://github.com/user-attachments/assets/f70712ed-bc38-4128-ae6d-0715ae5a5baf)![Desktop](https://github.com/user-attachments/assets/9197f149-e7bb-48ac-948e-0ad22430aec1)
+![Pomodoro Timer Screenshot](https://github.com/user-attachments/assets/f70712ed-bc38-4128-ae6d-0715ae5a5baf)
 
 ## Features
-- Customizable focus and break durations
-- Multiple loop support
-- Responsive design for both desktop and mobile devices
-- Audio notifications for timer completion
-- Pause and resume functionality with both click and spacebar
-- Real-time stats tracking across sessions
-- Toggle stats view with keyboard shortcuts or swipe gestures
 
-## How to Use
-1. Visit the [Website](https://anuragmmer.github.io/pomodoro) or download and install the [Android app](https://github.com/anuragmmer/pomodoro/raw/main/assets/android/anuragmmer.pomodoro.v.1.0.apk) (Works best on the app with an internet connection)
-2. Set your desired focus time (1-360 minutes)
-3. Set your desired break time (1-120 minutes)
-4. Choose the number of loops you want to complete
-5. Click "Start" to begin your Pomodoro session
-6. Use the pause button or press the spacebar to pause/resume the timer as needed
-7. When a focus period ends, you'll hear a notification
-8. When a break period ends, you'll hear a notification
-9. After completing all loops, stats will be displayed automatically
-10. To view stats during a session:
-    - On desktop: Press the 'i' or 's' key
-    - On mobile: Swipe up to view, swipe down to hide
-11. After viewing stats, the setup screen will reappear in 10 seconds
-12. Total focus and break times accumulate across sessions
+- **Customizable timing**: Focus (1-360 min), breaks (1-120 min), multiple loops
+- **Modern interface**: Dark theme with color-coded states (focus/break/pause)
+- **Dual input methods**: Range sliders + manual number input
+- **Audio notifications**: Custom sounds for period transitions + countdown beeps
+- **Responsive design**: Works on desktop and mobile
+- **Keyboard shortcuts**: Space to pause, 'i'/'s' to toggle stats
+- **Touch gestures**: Swipe up/down to show/hide stats on mobile
+- **Session tracking**: Real-time statistics during active sessions
 
-Note: Stats track your progress across multiple productivity sessions over time.
+## Usage
 
-## Technical Details
+1. Set focus time, break time, and number of loops
+2. Click "Start Session" to begin
+3. Click timer or press Space to pause/resume
+4. Audio plays when periods end
+5. View stats popup when session completes
 
-- Built with HTML, CSS, and JavaScript
-- Uses the Manrope, Inter and Gloock fonts from Google Fonts
-- Responsive design using CSS media queries
-- Audio feedback using the Web Audio API
+**Controls:**
+- Click timer or press `Space`: Pause/resume
+- Press `i` or `s`: Toggle stats view
+- Mobile: Swipe up/down to show/hide stats
 
-## Acknowledgments
+**Visual states:**
+- Focus: Black background, white text
+- Break: Lavender background, black text  
+- Paused: Pink background, blinking timer, contextual status text
 
-- Inspiration: The Pomodoro Technique by Francesco Cirillo
+## Implementation
+
+### Tech Stack
+- HTML5, CSS3, Vanilla JavaScript
+- Web Audio API for beeps
+- CSS Grid/Flexbox for responsive layout
+- Google Fonts (Inter, Gloock, Manrope)
+
+### Key Components
+
+**Timer Logic**
+```javascript
+currentTime = duration;
+interval = setInterval(() => {
+    if (!isPaused) {
+        currentTime--;
+        // Handle period transitions, audio, stats
+    }
+}, 1000);
+```
+
+**Audio System**
+- HTML5 audio elements for notification sounds
+- Web Audio API for programmatic countdown beeps
+- Preloading with fallback handling
+
+**State Management**
+- Focus/Relax/Paused states with visual feedback
+- Real-time stats calculation during active periods
+- Session data persists until page refresh
+
+**Responsive Design**
+- Mobile breakpoints at 480px and 360px
+- Touch-optimized controls and gesture recognition
+- Adaptive typography and spacing
+
+### File Structure
+```
+├── index.html          # Main application file
+├── audio/
+│   ├── timer.wav       # Focus period end sound
+│   ├── relax.wav       # Break period end sound
+│   └── loop.wav        # Session complete sound
+└── README.md
+```
+
+### Browser Support
+- Modern browsers with ES6+ support
+- Web Audio API (Chrome 34+, Firefox 25+, Safari 14.1+)
+- CSS Grid/Flexbox support
+- Touch events for mobile
+
+## Development
+
+The app is built as a single HTML file with embedded CSS and JavaScript for easy deployment. No build process or dependencies required.
+
+**Audio files**: Place three audio files in an `audio/` directory:
+- `timer.wav` - Plays when focus period ends
+- `relax.wav` - Plays when break period ends  
+- `loop.wav` - Plays when all loops complete
+
+## License
+
+MIT License. Inspired by the Pomodoro Technique by Francesco Cirillo.
