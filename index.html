@@ -51,65 +51,422 @@
         /* Mobile responsiveness */
         @media (max-width: 480px) {
             #setup-popup {
-                width: 90%;
-                max-width: 320px;
-                padding: 20px;
+                width: 85%;
+                max-width: 280px;
+                padding: 16px;
+                max-height: 85vh;
+                overflow-y: auto;
             }
 
             #setup-popup h1 {
-                font-size: 1.3rem;
-                margin-bottom: 16px;
+                font-size: 1.1rem;
+                margin-bottom: 12px;
             }
 
             .input-group {
-                margin-bottom: 14px;
+                margin-bottom: 10px;
             }
 
             .input-group label {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
+                margin-bottom: 4px;
             }
 
             .manual-input {
-                width: 45px;
-                padding: 5px 6px;
-                font-size: 0.75rem;
+                width: 40px;
+                padding: 4px 6px;
+                font-size: 0.7rem;
             }
 
             .value-display {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
             }
 
             #start-btn {
-                padding: 14px 24px;
-                font-size: 1rem;
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                margin-top: 12px;
             }
 
             #time {
-                font-size: 4.5rem;
+                font-size: 3.5rem;
             }
 
             #status {
+                font-size: 0.85rem;
+                margin-top: 16px;
+            }
+
+            #stats-popup {
+                width: 85%;
+                max-width: 280px;
+                padding: 16px;
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+
+            #stats-popup h2 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+
+            .stats-grid {
+                gap: 8px;
+                margin-bottom: 12px;
+            }
+
+            .stat-item {
+                padding: 10px;
+            }
+
+            .stat-value {
+                font-size: 1.3rem;
+            }
+
+            .stat-label {
+                font-size: 0.7rem;
+            }
+
+            #restart-btn {
+                padding: 10px 20px;
                 font-size: 0.9rem;
-                bottom: 15px;
             }
         }
 
         @media (max-width: 360px) {
             #setup-popup {
-                padding: 16px;
+                width: 90%;
+                max-width: 260px;
+                padding: 12px;
+                max-height: 90vh;
+            }
+
+            #setup-popup h1 {
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+
+            .input-group {
+                margin-bottom: 8px;
+            }
+
+            .input-group label {
+                font-size: 0.7rem;
+                margin-bottom: 3px;
+            }
+
+            .manual-input {
+                width: 35px;
+                padding: 3px 5px;
+                font-size: 0.65rem;
+            }
+
+            .value-display {
+                font-size: 0.75rem;
+            }
+
+            #start-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+                margin-top: 10px;
             }
 
             #time {
-                font-size: 3.8rem;
+                font-size: 3rem;
+            }
+
+            #status {
+                font-size: 0.8rem;
+                margin-top: 12px;
+            }
+
+            #stats-popup {
+                width: 90%;
+                max-width: 260px;
+                padding: 12px;
+                max-height: 85vh;
+            }
+
+            #stats-popup h2 {
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+
+            .stats-grid {
+                gap: 6px;
+                margin-bottom: 10px;
+            }
+
+            .stat-item {
+                padding: 8px;
+            }
+
+            .stat-value {
+                font-size: 1.1rem;
+            }
+
+            .stat-label {
+                font-size: 0.65rem;
+            }
+
+            #restart-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
             }
 
             .slider {
-                height: 8px;
+                height: 6px;
             }
 
             .slider::-webkit-slider-thumb {
-                width: 20px;
-                height: 20px;
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        /* Mobile landscape orientation */
+        @media (max-height: 500px) and (orientation: landscape) {
+            #setup-popup {
+                width: 60%;
+                max-width: 400px;
+                padding: 10px;
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+
+            #setup-popup h1 {
+                font-size: 1rem;
+                margin-bottom: 10px;
+                color: #ffffff;
+                font-weight: 600;
+            }
+
+            .input-group {
+                margin-bottom: 6px;
+            }
+
+            .input-group label {
+                font-size: 0.65rem;
+                margin-bottom: 2px;
+            }
+
+            .manual-input {
+                width: 30px;
+                padding: 2px 4px;
+                font-size: 0.6rem;
+            }
+
+            .value-display {
+                font-size: 0.7rem;
+            }
+
+            #start-btn {
+                padding: 6px 14px;
+                font-size: 0.75rem;
+                margin-top: 8px;
+            }
+
+            #time {
+                font-size: 2.2rem;
+            }
+
+            #status {
+                font-size: 0.7rem;
+                margin-top: 8px;
+            }
+
+            #stats-popup {
+                width: 65%;
+                max-width: 450px;
+                padding: 10px;
+                max-height: 75vh;
+                overflow-y: auto;
+            }
+
+            #stats-popup h2 {
+                font-size: 1rem;
+                margin-bottom: 10px;
+                color: #ffffff;
+                font-weight: 600;
+            }
+
+            .stats-grid {
+                gap: 4px;
+                margin-bottom: 8px;
+            }
+
+            .stat-item {
+                padding: 6px;
+            }
+
+            .stat-value {
+                font-size: 1rem;
+            }
+
+            .stat-label {
+                font-size: 0.6rem;
+            }
+
+            #restart-btn {
+                padding: 6px 14px;
+                font-size: 0.75rem;
+            }
+
+            .slider {
+                height: 4px;
+            }
+
+            .slider::-webkit-slider-thumb {
+                width: 14px;
+                height: 14px;
+            }
+        }
+
+        /* Very short landscape screens (like iPhone in landscape) */
+        @media (max-height: 400px) and (orientation: landscape) {
+            #setup-popup {
+                width: 70%;
+                max-width: 480px;
+                padding: 8px;
+                max-height: 75vh;
+            }
+
+            #setup-popup h1 {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+                color: #ffffff;
+                font-weight: 600;
+            }
+
+            .input-group {
+                margin-bottom: 4px;
+            }
+
+            .input-group label {
+                font-size: 0.6rem;
+                margin-bottom: 1px;
+            }
+
+            .manual-input {
+                width: 28px;
+                padding: 1px 3px;
+                font-size: 0.55rem;
+            }
+
+            .value-display {
+                font-size: 0.65rem;
+            }
+
+            #start-btn {
+                padding: 4px 12px;
+                font-size: 0.7rem;
+                margin-top: 6px;
+            }
+
+            #time {
+                font-size: 1.8rem;
+            }
+
+            #status {
+                font-size: 0.65rem;
+                margin-top: 6px;
+            }
+
+            #stats-popup {
+                width: 75%;
+                max-width: 520px;
+                padding: 8px;
+                max-height: 70vh;
+            }
+
+            #stats-popup h2 {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+                color: #ffffff;
+                font-weight: 600;
+            }
+
+            .stats-grid {
+                gap: 3px;
+                margin-bottom: 6px;
+            }
+
+            .stat-item {
+                padding: 4px;
+            }
+
+            .stat-value {
+                font-size: 0.9rem;
+            }
+
+            .stat-label {
+                font-size: 0.55rem;
+            }
+
+            #restart-btn {
+                padding: 4px 12px;
+                font-size: 0.7rem;
+            }
+
+            .slider {
+                height: 3px;
+            }
+
+            .slider::-webkit-slider-thumb {
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        /* Extra short screens */
+        @media (max-height: 320px) and (orientation: landscape) {
+            #setup-popup {
+                width: 80%;
+                max-width: 550px;
+                padding: 6px;
+                max-height: 70vh;
+            }
+
+            #setup-popup h1 {
+                font-size: 0.8rem;
+                margin-bottom: 6px;
+                color: #ffffff;
+                font-weight: 600;
+            }
+
+            .input-group {
+                margin-bottom: 3px;
+            }
+
+            #time {
+                font-size: 1.5rem;
+            }
+
+            #status {
+                font-size: 0.6rem;
+                margin-top: 4px;
+            }
+
+            #stats-popup {
+                width: 85%;
+                max-width: 600px;
+                padding: 6px;
+                max-height: 65vh;
+            }
+
+            #stats-popup h2 {
+                font-size: 0.8rem;
+                margin-bottom: 6px;
+                color: #ffffff;
+                font-weight: 600;
+            }
+
+            .stat-value {
+                font-size: 0.8rem;
+            }
+
+            .stat-label {
+                font-size: 0.5rem;
             }
         }
 
@@ -372,46 +729,74 @@
 
         @media (max-width: 480px) {
             #stats-popup {
-                width: 90%;
-                max-width: 340px;
-                padding: 24px;
+                width: 85%;
+                max-width: 280px;
+                padding: 16px;
+                max-height: 80vh;
+                overflow-y: auto;
             }
 
             #stats-popup h2 {
-                font-size: 1.3rem;
-                margin-bottom: 20px;
+                font-size: 1.1rem;
+                margin-bottom: 12px;
             }
 
             .stats-grid {
-                gap: 12px;
-                margin-bottom: 20px;
+                gap: 8px;
+                margin-bottom: 12px;
             }
 
             .stat-item {
-                padding: 14px;
+                padding: 10px;
             }
 
             .stat-value {
-                font-size: 1.6rem;
+                font-size: 1.3rem;
             }
 
             .stat-label {
-                font-size: 0.75rem;
+                font-size: 0.7rem;
             }
 
             #restart-btn {
-                padding: 14px 24px;
-                font-size: 1rem;
+                padding: 10px 20px;
+                font-size: 0.9rem;
             }
         }
 
         @media (max-width: 360px) {
             #stats-popup {
-                padding: 20px;
+                width: 90%;
+                max-width: 260px;
+                padding: 12px;
+                max-height: 85vh;
+            }
+
+            #stats-popup h2 {
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+
+            .stats-grid {
+                gap: 6px;
+                margin-bottom: 10px;
+            }
+
+            .stat-item {
+                padding: 8px;
             }
 
             .stat-value {
-                font-size: 1.4rem;
+                font-size: 1.1rem;
+            }
+
+            .stat-label {
+                font-size: 0.65rem;
+            }
+
+            #restart-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
             }
         }
 
@@ -433,12 +818,10 @@
         }
 
         #status {
-            position: absolute;
-            bottom: 20px;
+            position: relative;
+            margin-top: 24px;
             font-size: 1rem;
             color: white;
-            max-width: fit-content;
-            max-height: fit-content;
             text-align: center;
             transition: color 0.5s ease;
         }
@@ -594,6 +977,9 @@
             let periodStartTime = 0;
             let currentPeriodFocusTime = 0;
             let currentPeriodBreakTime = 0;
+            let sessionFocusTime = 0;
+            let sessionBreakTime = 0;
+            let sessionLoops = 0;
 
             function preloadSound(audioElement) {
                 return new Promise((resolve) => {
@@ -664,14 +1050,10 @@
             }
 
             function showStatsPopup() {
-                const sessionFocusTime = totalFocusTime + (loops - currentLoop) * 0; 
-                const sessionBreakTime = totalBreakTime + (loops - currentLoop) * 0; 
-                const totalSessionTime = sessionFocusTime + sessionBreakTime;
-
                 document.getElementById("final-focus-time").textContent = sessionFocusTime;
                 document.getElementById("final-break-time").textContent = sessionBreakTime;
-                document.getElementById("final-loops").textContent = loops;
-                document.getElementById("total-time").textContent = totalSessionTime;
+                document.getElementById("final-loops").textContent = sessionLoops;
+                document.getElementById("total-time").textContent = sessionFocusTime + sessionBreakTime;
 
                 disableTimer();
                 statsPopup.style.display = "flex";
@@ -692,8 +1074,9 @@
             function togglePause() {
                 if (setupPopup.style.display === "none") {
                     isPaused = !isPaused;
+
                     timeDisplay.classList.toggle("blinking", isPaused);
-                    
+
                     if (isPaused) {
                         timer.classList.add("paused");
                         pauseStartTime = Date.now();
@@ -771,6 +1154,7 @@
             restartBtn.addEventListener("click", function () {
                 setupPopup.style.display = "flex";
                 statsPopup.style.display = "none";
+                // Reset stats for new session
                 totalFocusTime = 0;
                 totalBreakTime = 0;
                 totalCompletedLoops = 0;
@@ -782,6 +1166,8 @@
                 periodStartTime = Date.now();
                 statusDisplay.textContent = status;
                 timeDisplay.textContent = formatTime(currentTime);
+
+                // Update visual state based on status
                 timer.classList.remove("relax", "paused");
                 if (status === STATUS_RELAX) {
                     timer.classList.add("relax");
@@ -804,10 +1190,12 @@
                         if (currentTime <= 0) {
                             clearInterval(interval);
                             if (status === STATUS_FOCUS) {
+                                sessionFocusTime += focusTime;
                                 totalFocusTime += focusTime;
                                 playSound(endSound);
                                 startTimer(restTime * 60, STATUS_RELAX);
                             } else if (status === STATUS_RELAX) {
+                                sessionBreakTime += restTime;
                                 totalBreakTime += restTime;
                                 playSound(relaxSound);
                                 currentLoop++;
